@@ -62,7 +62,7 @@ public:
 
 	inline size_type getSize( bool aligned32Bit ) const {
 		if( aligned32Bit ) {
-			return isis::glance::util::get32BitAlignedSize<3>( getSizeAsVector() );
+			return isis::glance::geometrical::get32BitAlignedSize<3>( getSizeAsVector() );
 		} else {
 			return getSizeAsVector();
 		}

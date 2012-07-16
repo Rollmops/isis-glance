@@ -113,7 +113,7 @@ DataHandler::permutation_type DataHandler::getPermutationSagittal ( const isis::
 	Volume::size_type _size;
 
 	if( aligned32Bit ) {
-		_size = isis::glance::util::get32BitAlignedSize<3>( size );
+		_size = isis::glance::geometrical::get32BitAlignedSize<3>( size );
 	} else {
 		_size = size;
 	}

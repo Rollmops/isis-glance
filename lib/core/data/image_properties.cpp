@@ -98,9 +98,9 @@ ImageMetaProperties::ImageMetaProperties ( const isis::data::Image &image )
 	//geometrical stuff
 	//we can put discard the 4th dimension in image_size cause this is defined through the size() of our image
 	image_size = size_type( image.getSizeAsVector()[0], image.getSizeAsVector()[1], image.getSizeAsVector()[2] );
-	image_size_aligned32 = util::get32BitAlignedSize<3>( image_size );
-	orientation_matrix = util::getOrientationMatrixFromPropMap( image );
-	orientation_matrix_latched = util::getLatchedOrienation( orientation_matrix );
+	image_size_aligned32 = geometrical::get32BitAlignedSize<3>( image_size );
+	orientation_matrix = geometrical::getOrientationMatrixFromPropMap( image );
+	orientation_matrix_latched = geometrical::getLatchedOrienation( orientation_matrix );
 	voxel_size = image.getPropertyAs<isis::util::fvector3>( "voxelSize" );
 
 	if( image.hasProperty( "voxelGap" ) ) {

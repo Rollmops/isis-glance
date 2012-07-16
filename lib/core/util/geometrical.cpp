@@ -31,7 +31,7 @@ namespace isis
 {
 namespace glance
 {
-namespace util
+namespace geometrical
 {
 
 isis::util::Matrix3x3< float > getOrientationMatrixFromPropMap ( const isis::util::PropertyMap &propmap )

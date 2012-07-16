@@ -81,7 +81,7 @@ Slice Volume::extractSlice (  fvec perpendicular, const ivec &coords,  bool forc
 	size_type sliceSize;
 
 	if( force32BitAligned ) {
-		sliceSize = isis::glance::util::get32BitAlignedSize<3>( size );
+		sliceSize = isis::glance::geometrical::get32BitAlignedSize<3>( size );
 	} else {
 		sliceSize = size;
 	}

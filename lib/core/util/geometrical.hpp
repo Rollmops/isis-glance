@@ -36,7 +36,7 @@ namespace isis
 {
 namespace glance
 {
-namespace util
+namespace geometrical
 {
 
 template<unsigned short DIM>
