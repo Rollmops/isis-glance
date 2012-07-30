@@ -35,12 +35,13 @@ namespace data
 {
 
 ImageContainer::ImageContainer()
-	: allow_multiple_( false )
+	: allowMultiple_( false )
 {}
+
 
 bool ImageContainer::addImage ( const ImageSharedPointer &image )
 {
-	if ( !hasImage( image ) || allow_multiple_ ) {
+	if ( !hasImage( image ) || allowMultiple_ ) {
 		push_back( image );
 		signal_image_added( *this, image );
 		return true;

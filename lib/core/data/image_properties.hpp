@@ -37,6 +37,7 @@
 
 #include "data_handler.hpp"
 #include "types.hpp"
+#include "util/geometrical.hpp"
 
 namespace isis
 {
@@ -53,8 +54,7 @@ class ImageMetaProperties : public isis::util::PropertyMap
 {
 	friend class Volume;
 public:
-	typedef isis::util::vector3<size_t> size_type;
-	typedef isis::util::Matrix3x3<float> orientation_matrix_type;
+	typedef isis::util::vector4<size_t> size_type;
 
 	/**
 	 * Empty constructur for ImageProperties
@@ -87,10 +87,10 @@ public:
 	size_type image_size_aligned32;
 
 	///The image orientation matrix
-	orientation_matrix_type orientation_matrix;
+	geometrical::orientation_type orientation_matrix;
 
 	///The latched orientation_matrix
-	orientation_matrix_type orientation_matrix_latched;
+	geometrical::orientation_type orientation_matrix_latched;
 
 	///The sum of voxelSize and voxelGap
 	isis::util::fvector3 voxel_size;

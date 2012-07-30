@@ -37,10 +37,8 @@ namespace glance
 namespace data
 {
 #ifdef ISIS_GLANCE_USE_LIBOIL
-
 namespace _internal
 {
-
 #define IMPL_OIL_EXTRACT_SAG( TYPE, OIL_SUFFIX ) \
 	template<> void oilExtractSagittal<TYPE>( TYPE *destPtr, const TYPE *srcPtr, const int32_t *permutation, const size_t &length ) {\
 		oil_permute_ ## OIL_SUFFIX ( destPtr, sizeof(TYPE), srcPtr, sizeof(TYPE), permutation, sizeof(int32_t), length ); \

@@ -35,6 +35,7 @@
 #include "slice.hpp"
 #include "data_handler.hpp"
 #include "util/geometrical.hpp"
+#include "types.hpp"
 
 namespace isis
 {
@@ -47,38 +48,35 @@ class Volume : public _internal::DataContainer<3>
 public:
 	typedef isis::util::vector3<size_t> size_type;
 	typedef isis::util::fvector3 fvec;
-	typedef isis::util::ivector4 ivec;
 	typedef isis::util::dvector3 dvec;
+	typedef isis::util::vector3<int32_t> ivec;
 
-	Volume ( const isis::data::ValueArrayReference &src, const size_type &size );
-	Volume ( const isis::data::ValueArrayReference &src, const size_type &size, const ImageSharedPointer parentImage );
+	Volume ( const isis::data::ValueArrayReference &src, const size_type &size, const Image *parentImage );
 
-	Slice extractSlice( fvec perpendicular, const ivec &coords, bool force32BitAligned = false ) const;
-	std::vector< isis::glance::data::Slice > extractAllSlices ( fvec perpendicular, bool force32BitAligned = false ) const;
+	Slice extractSlice( const geometrical::orientation_type &orientation, const ivec &coords, bool force32BitAligned = false ) const;
 
-	const ImageSharedPointer getParent() const { return parentImage_; }
+	const Image *getParentImage() const { return parentImage_; }
 
 	DataHandler::permutation_type getPermutationSagittal( bool aligned32Bit ) const;
 
 	inline size_type getSize( bool aligned32Bit ) const {
 		if( aligned32Bit ) {
-			return isis::glance::geometrical::get32BitAlignedSize<3>( getSizeAsVector() );
+			return geometrical::get32BitAlignedSize<3>( getSizeAsVector() );
 		} else {
 			return getSizeAsVector();
 		}
 	};
 
+	void convertToType( const types::ImageDataType &type );
+
 
 private:
-	Slice extractSliceGeneric( const fvec &perpendicular, const ivec &coords, bool force32BitAligned ) const;
+	Slice extractSliceGeneric( const isis::data::ValueArrayBase *src, const geometrical::orientation_type &orientation, const ivec &coords, bool force32BitAligned ) const;
 
 	Slice extractSliceAxial( const isis::data::ValueArrayBase *src, const size_t &slice, const size_type &size, const size_type &sliceSize, const size_t &bytesPerElem, const size_t &typeFac ) const;
 	Slice extractSliceCoronal( const isis::data::ValueArrayBase *src, const size_t &slice, const size_type &size, const size_type &sliceSize, const size_t &bytesPerElem, const size_t &typeFac ) const;
 
-	ImageSharedPointer parentImage_;
-	DataHandler::permutation_type permutationSagittal_;
-	DataHandler::permutation_type permutationSagittalAligned32Bit_;
-
+	const Image *parentImage_;
 };
 } // end namespace data
 } // end namespace glance

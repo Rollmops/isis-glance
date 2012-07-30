@@ -1,7 +1,7 @@
 INCLUDE(CTest)
 ENABLE_TESTING()
 
-include_directories(${CMAKE_SOURCE_DIR}/lib/Core)
+include_directories(${CMAKE_SOURCE_DIR}/lib/core)
 
 find_package(Boost REQUIRED COMPONENTS unit_test_framework)
 include_directories(${Boost_INCLUDE_DIR})
@@ -18,7 +18,7 @@ else(DOT_LIB OR DOT_A)
 	message(STATUS "${Boost_UNIT_TEST_FRAMEWORK_LIBRARY} seems to be a dynamic library adding \"-DBOOST_TEST_DYN_LINK\"")
 endif(DOT_LIB OR DOT_A)
 
-add_subdirectory(Core)
+add_subdirectory(core)
 add_subdirectory(data)
 
 # addition option: build benchmarks

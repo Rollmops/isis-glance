@@ -110,18 +110,14 @@ void Image::setProposedDataType ( const ImageDataProperties::ImageTypeGroup &typ
 }
 
 
-void Image::convertVolumesByType ( const types::ImageDataType &type )
+void Image::convertVolumesToType ( const types::ImageDataType &type )
 {
 	signal_conversion_begin( *this, type );
 	LOG( Runtime, info ) << "Converting image " << file_path << " to type "
 						 << isis::util::getTypeMap( false ).at( type );
-	VolumesType buffer;
-	const size_t volume_size[] = { image_size[0], image_size[1], image_size[2] };
 	BOOST_FOREACH( VolumesType::reference volume, volumes_ ) {
-		buffer.push_back( Volume( volume->convertByID( type ), volume_size ) );
+		volume.convertToType( type );
 	}
-	assert( buffer.size() == volumes_.size() );
-	volumes_ = buffer;
 	signal_conversion_end( *this, type );
 }
 

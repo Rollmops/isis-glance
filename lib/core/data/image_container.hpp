@@ -73,15 +73,15 @@ public:
 	 */
 	virtual bool hasImage( const ImageSharedPointer &image ) const;
 
-	void setAllowMultiple( bool allow ) { allow_multiple_ = allow; }
-	const bool &getAllowMultiple() const { return allow_multiple_; }
+	void setAllowMultiple( bool allow ) { allowMultiple_ = allow; }
+	const bool &getAllowMultiple() const { return allowMultiple_; }
 
 	//signals
 	boost::signals2::signal<void ( const ImageContainer &, const ImageSharedPointer & )> signal_image_added;
 	boost::signals2::signal<void ( const ImageContainer &, const ImageSharedPointer & )> signal_image_removed;
 
 private:
-	bool allow_multiple_;
+	bool allowMultiple_;
 };
 
 } // end namespace data

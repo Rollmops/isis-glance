@@ -40,7 +40,7 @@ namespace glance
 {
 namespace util
 {
-class Thread
+class Thread : boost::noncopyable
 {
 protected:
 	Thread();

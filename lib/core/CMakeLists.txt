@@ -12,6 +12,7 @@ set(ISIS_GLANCE_BUILD_STATIC OFF CACHE BOOL "enable build of the static library.
 ############################################################
 set(ISIS_GLANCE_USE_LIBOIL OFF CACHE BOOL "use liboil" )
 if(ISIS_GLANCE_USE_LIBOIL)
+	message(STATUS "Enabling liboil support")
 	find_path(LibOil_INCLUDE_DIR "liboil/liboil.h" PATH_SUFFIXES "liboil" "liboil-0.3")
 	find_library(LibOil_LIBRARY NAMES "oil-0.3")
 	include_directories(${LibOil_INCLUDE_DIR})

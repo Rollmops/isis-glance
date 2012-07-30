@@ -96,9 +96,8 @@ bool ImageDataProperties::getHasOneType( const isis::data::Image &image ) const
 ImageMetaProperties::ImageMetaProperties ( const isis::data::Image &image )
 {
 	//geometrical stuff
-	//we can put discard the 4th dimension in image_size cause this is defined through the size() of our image
-	image_size = size_type( image.getSizeAsVector()[0], image.getSizeAsVector()[1], image.getSizeAsVector()[2] );
-	image_size_aligned32 = geometrical::get32BitAlignedSize<3>( image_size );
+	image_size = image.getSizeAsVector();
+	image_size_aligned32 = geometrical::get32BitAlignedSize<4>( image_size );
 	orientation_matrix = geometrical::getOrientationMatrixFromPropMap( image );
 	orientation_matrix_latched = geometrical::getLatchedOrienation( orientation_matrix );
 	voxel_size = image.getPropertyAs<isis::util::fvector3>( "voxelSize" );
@@ -116,7 +115,6 @@ ImageMetaProperties::ImageMetaProperties ( const isis::data::Image &image )
 	const Volume::size_type volSize( image_size[0], image_size[1], image_size[2] );
 
 	permutationSagittal_ = DataHandler::getPermutationSagittal( volSize, false );
-
 	permutationSagittalAligned32Bit_ = DataHandler::getPermutationSagittal( volSize, true );
 }
 

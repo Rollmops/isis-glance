@@ -26,6 +26,7 @@
  *      Author: tuerke
  ******************************************************************/
 #include "geometrical.hpp"
+#include "common.hpp"
 
 namespace isis
 {
@@ -34,17 +35,17 @@ namespace glance
 namespace geometrical
 {
 
-isis::util::Matrix3x3< float > getOrientationMatrixFromPropMap ( const isis::util::PropertyMap &propmap )
+orientation_type getOrientationMatrixFromPropMap ( const isis::util::PropertyMap &propmap )
 {
-	const isis::util::Matrix3x3<float> retMatrix (  propmap.getPropertyAs<isis::util::fvector3>( "rowVec" ),
+	const orientation_type retMatrix (  propmap.getPropertyAs<isis::util::fvector3>( "rowVec" ),
 			propmap.getPropertyAs<isis::util::fvector3>( "columnVec" ),
 			propmap.getPropertyAs<isis::util::fvector3>( "sliceVec" ) );
 	return retMatrix;
 }
 
-isis::util::Matrix3x3< float > getLatchedOrienation ( const isis::util::Matrix3x3< float > &orientation_matrix )
+orientation_type getLatchedOrienation ( const orientation_type &orientation_matrix )
 {
-	isis::util::Matrix3x3<float> retMatrix;
+	orientation_type retMatrix;
 	retMatrix.fill( 0 );
 	const isis::util::fvector3 &rowVec = orientation_matrix.getRow( 0 );
 	const isis::util::fvector3 &columnVec = orientation_matrix.getRow( 1 );
@@ -96,12 +97,39 @@ isis::util::Matrix3x3< float > getLatchedOrienation ( const isis::util::Matrix3x
 	retMatrix.elem( rB, 0 ) = rowVec[rB] < 0 ? -1 : 1;
 	retMatrix.elem( cB, 1 ) =  columnVec[cB] < 0 ? -1 : 1;
 	retMatrix.elem( sB, 2 ) = sliceVec[sB] < 0 ? -1 : 1;
-	retMatrix.elem( 3, 3 ) = 1;
 	return retMatrix;
 }
 
 
+const orientation_type &getMatrixForPlaneOrientation ( const PlaneOrientation& planeOrientation )
+{
+	static const orientation_type axialMatrix (	isis::util::fvector3( -1, 0, 0),
+												isis::util::fvector3( 0, 1, 0 ),
+												isis::util::fvector3( 0, 0, 1 ) );
+	
+	static const orientation_type sagittalMatrix ( 	isis::util::fvector3( 0, 1, 0 ),
+													isis::util::fvector3( 0, 0, -1 ),
+													isis::util::fvector3( 1, 0, 0 ) );
+	
+	static const orientation_type coronalMatrix ( 	isis::util::fvector3( -1, 0, 0),
+													isis::util::fvector3( 0, 0, -1 ),
+													isis::util::fvector3( 0, 1, 0 ) );
+	
+	switch( planeOrientation ) {
+		case AXIAL:
+			return axialMatrix;
+		case SAGITTAL:
+			return sagittalMatrix;
+		case CORONAL:
+			return coronalMatrix;
+		case NOT_SPECIFIED:
+			LOG( isis::glance::util::Runtime, warning )
+				<< "The matrix for the plane orientation \"NOT_SPECIFIED\" is not defined. Returning the \"AXIAL\" matrix!";
+			return axialMatrix;
+	}
+}
 
-} // end namespace util
+
+} // end namespace geometrical
 } // end namespace glance
 } // end namespace isis

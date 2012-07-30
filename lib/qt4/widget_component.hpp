@@ -49,7 +49,6 @@ public:
 	WidgetComponent( QWidget *parent, WidgetBaseType *widgetInterface );
 
 	boost::shared_ptr< WidgetBaseType > get() const { return widgetInterface_; }
-
 private:
 	boost::shared_ptr< WidgetBaseType > widgetInterface_;
 

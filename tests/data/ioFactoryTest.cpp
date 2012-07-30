@@ -12,8 +12,8 @@ extern "C" {
 
 int main( int /*argc*/, char **argv )
 {
-	//  ENABLE_LOG( isis::glance::data::Debug, isis::util::DefaultMsgPrint, isis::verbose_info );
-	//  ENABLE_LOG( isis::glance::util::Debug, isis::util::DefaultMsgPrint, isis::verbose_info );
+	 ENABLE_LOG( isis::glance::data::Debug, isis::util::DefaultMsgPrint, isis::verbose_info );
+	 ENABLE_LOG( isis::glance::util::Debug, isis::util::DefaultMsgPrint, isis::verbose_info );
 	ENABLE_LOG( isis::glance::data::Runtime, isis::util::DefaultMsgPrint, isis::verbose_info );
 	//  const int dstr = atoi(argv[1]);
 	//  const int sstr1 = atoi(argv[2]);
@@ -36,17 +36,13 @@ int main( int /*argc*/, char **argv )
 
 	boost::timer timer;
 
-	isis::glance::data::IOFactory::setUseProposedDataType( true );
-	isis::glance::data::IOFactory::setProposedDataType( isis::glance::data::ImageDataProperties::SCALAR, isis::glance::data::types::UINT16_T );
+// 	isis::glance::data::IOFactory::setUseProposedDataType( true );
+// 	isis::glance::data::IOFactory::setProposedDataType( isis::glance::data::ImageDataProperties::SCALAR, isis::glance::data::types::UINT16_T );
 
 	isis::glance::data::Image::SharedPointer image = isis::glance::data::IOFactory::load( paths ).front();
 
 	const isis::glance::data::Volume &vol = image->operator[]( 0 );
 
-	isis::glance::data::Volume::fvec perp;
-	perp[0] = 1;
-	perp[1] = 0;
-	perp[2] = 0;
 	isis::glance::data::Volume::ivec coords;
 	coords[0] = image->image_size[0] / 2;
 	coords[1] = image->image_size[1] / 2;
@@ -54,43 +50,16 @@ int main( int /*argc*/, char **argv )
 
 	const size_t iterations = 5000;
 	const bool aligned = true;
-
-	isis::glance::data::Slice sliceSagittal = vol.extractSlice( perp, coords, aligned );
+	timer.restart();
+// 	for( size_t i = 0; i < iterations; i++ )
+	isis::glance::geometrical::orientation_type om = isis::glance::geometrical::getMatrixForPlaneOrientation(isis::glance::geometrical::AXIAL);
+	om.elem(2,2) = 1;
+	om.elem(1,2) = 0.5;
+	isis::glance::data::Slice sliceSagittal = vol.extractSlice( om, coords, aligned );
 	isis::data::Chunk chunkSag( sliceSagittal,  sliceSagittal.getSizeAsVector()[0], sliceSagittal.getSizeAsVector()[1], 1, 1, true );
 	isis::data::Image imageOutSag( chunkSag );
 	isis::data::IOFactory::write( imageOutSag, "/tmp/sagittal.nii" );
-
-	perp[0] = 0;
-	perp[1] = 1;
-	perp[2] = 0;
-
-	isis::glance::data::Slice sliceCoronal = vol.extractSlice( perp, coords, aligned );
-	isis::data::Chunk chunkCoronal( sliceCoronal,  sliceCoronal.getSizeAsVector()[0], sliceCoronal.getSizeAsVector()[1], 1, 1, true );
-	isis::data::Image imageOutCoronal( chunkCoronal );
-	isis::data::IOFactory::write( imageOutCoronal, "/tmp/coronal.nii" );
-
-
-	perp[0] = 0;
-	perp[1] = 0;
-	perp[2] = 1;
-	isis::glance::data::Slice slice = vol.extractSlice( perp, coords, aligned );
-
-	isis::data::Chunk chunk( slice,  slice.getSizeAsVector()[0], slice.getSizeAsVector()[1], 1, 1, true );
-	isis::data::Image imageOut( chunk );
-
-	isis::data::IOFactory::write( imageOut, "/tmp/axial.nii" );
-
-	std::vector<isis::glance::data::Slice> slices = vol.extractAllSlices( perp );
-
-	for ( size_t i = 0; i < slices.size(); i++ ) {
-		isis::data::Chunk chunk( slices[i],  slices[i].getSizeAsVector()[0], slices[i].getSizeAsVector()[1], 1, 1, true );
-		isis::data::Image imageOut( chunk );
-		std::stringstream name;
-		name << "/tmp/series" << i << ".nii";
-		isis::data::IOFactory::write( imageOut, name.str() );
-	}
-
-
+	std::cout << timer.elapsed() << " seconds" << std::endl;
 
 
 	return 0;

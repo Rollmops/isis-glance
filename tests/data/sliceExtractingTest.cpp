@@ -49,23 +49,6 @@ bool checkSlice( isis::glance::data::Slice slice )
 }
 
 
-
-BOOST_AUTO_TEST_CASE ( slice_extract )
-{
-	isis::glance::data::Volume::ivec coords;
-	isis::glance::data::Volume::fvec perp;
-
-#define TEST_CASE( TYPE, p1,p2,p3, dim, aligned ){  perp[0] = p1; perp[1] = p2; perp[2] = p3; \
-		coords[0] = 49; coords[1] = 21; coords[2] = 25; \
-		isis::glance::data::Volume vol = createVolume<TYPE>(99,43,51, static_cast<isis::data::dimensions>(dim) ); \
-		BOOST_CHECK( checkSlice<TYPE>( vol.extractSlice( perp, coords, aligned ) ) );}
-
-	TEST_CASE( uint8_t, 0, 0, 1, 0, false )
-	TEST_CASE( uint8_t, 0, 1, 0, 1, false )
-	TEST_CASE( uint8_t, 1, 0, 0, 2, false )
-	TEST_CASE( int8_t, 0, 0, 1, 0, false )
-
-}
 }
 }
 }

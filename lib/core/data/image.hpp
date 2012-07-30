@@ -92,9 +92,10 @@ public:
 	static util::Signal<void( const Image &, const types::ImageDataType & )> signal_conversion_end;
 	static util::Signal<void( const Image &, const ImageContentType & )> signal_content_changed;
 
+	void convertVolumesToType( const types::ImageDataType &type );
+	
 protected:
 	bool synchronizeVoxelContentFrom( isis::data::Image image );
-	void convertVolumesByType( const types::ImageDataType &type );
 private:
 	//we need to hold these properties for future calls of synchronize and synchronizeFrom
 	types::ImageDataType type_;

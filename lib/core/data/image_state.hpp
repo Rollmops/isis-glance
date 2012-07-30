@@ -59,6 +59,9 @@ public:
 
 	///Is this image valid?
 	bool is_valid;
+
+	///Opacity of the image
+	float opacitiy;
 protected:
 	ImageState() {}
 };
