@@ -38,11 +38,11 @@ namespace glance
 namespace data
 {
 
-void Volume::convertToType ( const types::ImageDataType& type )
+void Volume::convertToType ( const types::ImageDataType &type )
 {
 	static_cast<isis::data::ValueArrayReference &>( *this ) = this->operator->()->convertByID( type );
 }
-	
+
 Volume::Volume ( const isis::data::ValueArrayReference &src, const size_type &size, const Image *parentImage )
 	: DataContainer< 3 > ( src, size ),
 	  parentImage_( parentImage )
@@ -73,7 +73,9 @@ Slice Volume::extractSlice ( const geometrical::orientation_type &orientation, c
 	} else {
 		sliceSize = size;
 	}
-	const isis::util::fvector3 direction = orientation.getRow(isis::data::sliceDim).norm();
+
+	const isis::util::fvector3 direction = orientation.getRow( isis::data::sliceDim ).norm();
+
 	//we can define some special cases to increase performance
 	if( abs( direction[2] ) == 1 ) {
 		return extractSliceAxial( src, coords[isis::data::sliceDim], size, sliceSize, bytesPerElem, typeFac );
@@ -129,11 +131,11 @@ Slice Volume::extractSliceCoronal ( const isis::data::ValueArrayBase *src, const
 Slice Volume::extractSliceGeneric ( const isis::data::ValueArrayBase *src, const geometrical::orientation_type &orientation, const ivec &coords, bool force32BitAligned ) const
 {
 	const geometrical::orientation_type latchedOrientation = geometrical::getLatchedOrienation( orientation );
-	const isis::util::fvector3 direction = orientation.getRow(isis::data::sliceDim).norm();
+	const isis::util::fvector3 direction = orientation.getRow( isis::data::sliceDim ).norm();
 	const uint8_t *srcPtr = static_cast<const uint8_t *>( src->getRawAddress().get() );
-	
-	
-	
+
+
+
 }
 
 

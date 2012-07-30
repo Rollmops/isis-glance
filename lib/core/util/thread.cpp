@@ -37,7 +37,7 @@ namespace glance
 namespace util
 {
 
-	
+
 Thread::Thread()
 	: running_( false ),
 	  debugIdent_( "" )
@@ -47,6 +47,7 @@ Thread::~Thread()
 {
 	if( thread_ ) {
 		LOG( Debug, verbose_info ) << "Destructing thread " << debugIdent_;
+
 		if( thread_->joinable() ) {
 			thread_->join();
 		}

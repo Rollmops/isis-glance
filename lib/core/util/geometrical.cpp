@@ -38,8 +38,8 @@ namespace geometrical
 orientation_type getOrientationMatrixFromPropMap ( const isis::util::PropertyMap &propmap )
 {
 	const orientation_type retMatrix (  propmap.getPropertyAs<isis::util::fvector3>( "rowVec" ),
-			propmap.getPropertyAs<isis::util::fvector3>( "columnVec" ),
-			propmap.getPropertyAs<isis::util::fvector3>( "sliceVec" ) );
+										propmap.getPropertyAs<isis::util::fvector3>( "columnVec" ),
+										propmap.getPropertyAs<isis::util::fvector3>( "sliceVec" ) );
 	return retMatrix;
 }
 
@@ -101,31 +101,31 @@ orientation_type getLatchedOrienation ( const orientation_type &orientation_matr
 }
 
 
-const orientation_type &getMatrixForPlaneOrientation ( const PlaneOrientation& planeOrientation )
+const orientation_type &getMatrixForPlaneOrientation ( const PlaneOrientation &planeOrientation )
 {
-	static const orientation_type axialMatrix (	isis::util::fvector3( -1, 0, 0),
-												isis::util::fvector3( 0, 1, 0 ),
-												isis::util::fvector3( 0, 0, 1 ) );
-	
-	static const orientation_type sagittalMatrix ( 	isis::util::fvector3( 0, 1, 0 ),
-													isis::util::fvector3( 0, 0, -1 ),
-													isis::util::fvector3( 1, 0, 0 ) );
-	
-	static const orientation_type coronalMatrix ( 	isis::util::fvector3( -1, 0, 0),
-													isis::util::fvector3( 0, 0, -1 ),
-													isis::util::fvector3( 0, 1, 0 ) );
-	
+	static const orientation_type axialMatrix ( isis::util::fvector3( -1, 0, 0 ),
+			isis::util::fvector3( 0, 1, 0 ),
+			isis::util::fvector3( 0, 0, 1 ) );
+
+	static const orientation_type sagittalMatrix (  isis::util::fvector3( 0, 1, 0 ),
+			isis::util::fvector3( 0, 0, -1 ),
+			isis::util::fvector3( 1, 0, 0 ) );
+
+	static const orientation_type coronalMatrix (   isis::util::fvector3( -1, 0, 0 ),
+			isis::util::fvector3( 0, 0, -1 ),
+			isis::util::fvector3( 0, 1, 0 ) );
+
 	switch( planeOrientation ) {
-		case AXIAL:
-			return axialMatrix;
-		case SAGITTAL:
-			return sagittalMatrix;
-		case CORONAL:
-			return coronalMatrix;
-		case NOT_SPECIFIED:
-			LOG( isis::glance::util::Runtime, warning )
+	case AXIAL:
+		return axialMatrix;
+	case SAGITTAL:
+		return sagittalMatrix;
+	case CORONAL:
+		return coronalMatrix;
+	case NOT_SPECIFIED:
+		LOG( isis::glance::util::Runtime, warning )
 				<< "The matrix for the plane orientation \"NOT_SPECIFIED\" is not defined. Returning the \"AXIAL\" matrix!";
-			return axialMatrix;
+		return axialMatrix;
 	}
 }
 

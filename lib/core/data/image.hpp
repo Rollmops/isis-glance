@@ -93,7 +93,7 @@ public:
 	static util::Signal<void( const Image &, const ImageContentType & )> signal_content_changed;
 
 	void convertVolumesToType( const types::ImageDataType &type );
-	
+
 protected:
 	bool synchronizeVoxelContentFrom( isis::data::Image image );
 private:

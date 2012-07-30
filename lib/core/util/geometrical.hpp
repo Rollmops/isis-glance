@@ -39,9 +39,9 @@ namespace glance
 namespace geometrical
 {
 typedef isis::util::Matrix3x3<float> orientation_type;
-	
+
 enum PlaneOrientation { AXIAL, SAGITTAL, CORONAL, NOT_SPECIFIED };
-	
+
 template<unsigned short DIM>
 isis::util::FixedVector<size_t, DIM> get32BitAlignedSize( const isis::util::FixedVector<size_t, DIM> &orig_size )
 {

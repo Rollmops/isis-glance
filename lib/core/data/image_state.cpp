@@ -36,7 +36,7 @@ namespace data
 ImageState::ImageState ( const isis::data::Image &image )
 	: is_visible( true ),
 	  is_valid( false ),
-	  opacitiy(1.)
+	  opacitiy( 1. )
 {
 	voxel_coords = image.getSizeAsVector() / 2;
 	voxel_coords[isis::data::timeDim] = 0;

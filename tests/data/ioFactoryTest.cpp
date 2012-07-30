@@ -12,8 +12,8 @@ extern "C" {
 
 int main( int /*argc*/, char **argv )
 {
-	 ENABLE_LOG( isis::glance::data::Debug, isis::util::DefaultMsgPrint, isis::verbose_info );
-	 ENABLE_LOG( isis::glance::util::Debug, isis::util::DefaultMsgPrint, isis::verbose_info );
+	ENABLE_LOG( isis::glance::data::Debug, isis::util::DefaultMsgPrint, isis::verbose_info );
+	ENABLE_LOG( isis::glance::util::Debug, isis::util::DefaultMsgPrint, isis::verbose_info );
 	ENABLE_LOG( isis::glance::data::Runtime, isis::util::DefaultMsgPrint, isis::verbose_info );
 	//  const int dstr = atoi(argv[1]);
 	//  const int sstr1 = atoi(argv[2]);
@@ -36,8 +36,8 @@ int main( int /*argc*/, char **argv )
 
 	boost::timer timer;
 
-// 	isis::glance::data::IOFactory::setUseProposedDataType( true );
-// 	isis::glance::data::IOFactory::setProposedDataType( isis::glance::data::ImageDataProperties::SCALAR, isis::glance::data::types::UINT16_T );
+	//  isis::glance::data::IOFactory::setUseProposedDataType( true );
+	//  isis::glance::data::IOFactory::setProposedDataType( isis::glance::data::ImageDataProperties::SCALAR, isis::glance::data::types::UINT16_T );
 
 	isis::glance::data::Image::SharedPointer image = isis::glance::data::IOFactory::load( paths ).front();
 
@@ -51,10 +51,10 @@ int main( int /*argc*/, char **argv )
 	const size_t iterations = 5000;
 	const bool aligned = true;
 	timer.restart();
-// 	for( size_t i = 0; i < iterations; i++ )
-	isis::glance::geometrical::orientation_type om = isis::glance::geometrical::getMatrixForPlaneOrientation(isis::glance::geometrical::AXIAL);
-	om.elem(2,2) = 1;
-	om.elem(1,2) = 0.5;
+	//  for( size_t i = 0; i < iterations; i++ )
+	isis::glance::geometrical::orientation_type om = isis::glance::geometrical::getMatrixForPlaneOrientation( isis::glance::geometrical::AXIAL );
+	om.elem( 2, 2 ) = 1;
+	om.elem( 1, 2 ) = 0.5;
 	isis::glance::data::Slice sliceSagittal = vol.extractSlice( om, coords, aligned );
 	isis::data::Chunk chunkSag( sliceSagittal,  sliceSagittal.getSizeAsVector()[0], sliceSagittal.getSizeAsVector()[1], 1, 1, true );
 	isis::data::Image imageOutSag( chunkSag );
