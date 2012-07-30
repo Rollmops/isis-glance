@@ -42,7 +42,7 @@ ImageContainer::ImageContainer()
 bool ImageContainer::addImage ( const ImageSharedPointer &image )
 {
 	if ( !hasImage( image ) || allowMultiple_ ) {
-		push_back( image );
+		vector_.push_back( image );
 		signal_image_added( *this, image );
 		return true;
 	} else {
@@ -63,12 +63,12 @@ bool ImageContainer::addImages ( const ImageVector &images )
 
 bool ImageContainer::removeImage ( const ImageSharedPointer &image )
 {
-	iterator iter = std::find( begin(), end(), image );
+	ImageVector::iterator iter = std::find( vector_.begin(), vector_.end(), image );
 
-	if( iter == end() ) {
+	if( iter == vector_.end() ) {
 		return false;
 	} else {
-		erase( iter );
+		vector_.erase( iter );
 		signal_image_removed( *this, image );
 		return true;
 	}
@@ -76,7 +76,7 @@ bool ImageContainer::removeImage ( const ImageSharedPointer &image )
 
 bool ImageContainer::hasImage ( const isis::glance::data::ImageSharedPointer &image ) const
 {
-	return std::find( begin(), end(), image ) != end();
+	return std::find( vector_.begin(), vector_.end(), image ) != vector_.end();
 }
 
 

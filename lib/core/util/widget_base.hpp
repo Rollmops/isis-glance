@@ -29,7 +29,9 @@
 #define _ISIS_GLANCE_WIDGET_BASE_HPP
 
 #include "data/image_container.hpp"
+#include "util/geometrical.hpp"
 #include "plugin_interface_base.hpp"
+#include "widget_properties.hpp"
 
 namespace isis
 {
@@ -37,26 +39,16 @@ namespace glance
 {
 namespace widget
 {
-namespace _internal
-{
-struct NoBaseWidget {};
-}
 /**
 * Base class for widgets.
 */
 
-template < class BASE = _internal::NoBaseWidget >
 class WidgetBase :
 	public plugin::PluginInterfaceBase,
-	public BASE,
-	public isis::glance::data::ImageContainer
+	public isis::glance::data::ImageContainer,
+	public isis::glance::widget::WidgetProperties
 {
 public:
-
-protected:
-	WidgetBase( BASE *parent ) : BASE( parent ) {}
-
-
 };
 
 } // end namespace widget

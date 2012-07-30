@@ -31,7 +31,8 @@
 #include <boost/shared_ptr.hpp>
 
 #include <QWidget>
-#include "util/widget_base.hpp"
+#include <QVBoxLayout>
+#include "qt4_widget_base.hpp"
 
 
 namespace isis
@@ -43,14 +44,12 @@ namespace qt4
 
 class WidgetComponent : public QWidget
 {
-	Q_OBJECT
 public:
-	typedef isis::glance::widget::WidgetBase<QWidget> WidgetBaseType;
-	WidgetComponent( QWidget *parent, WidgetBaseType *widgetInterface );
+	WidgetComponent( QWidget *parent, _internal::Qt4WidgetBase *widgetInterface );
 
-	boost::shared_ptr< WidgetBaseType > get() const { return widgetInterface_; }
+	boost::shared_ptr< _internal::Qt4WidgetBase > get() const { return widgetInterface_; }
 private:
-	boost::shared_ptr< WidgetBaseType > widgetInterface_;
+	boost::shared_ptr< _internal::Qt4WidgetBase > widgetInterface_;
 
 };
 

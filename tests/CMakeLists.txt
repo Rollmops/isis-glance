@@ -3,6 +3,7 @@ ENABLE_TESTING()
 
 include_directories(${CMAKE_SOURCE_DIR}/lib/core)
 
+
 find_package(Boost REQUIRED COMPONENTS unit_test_framework)
 include_directories(${Boost_INCLUDE_DIR})
 
@@ -20,6 +21,7 @@ endif(DOT_LIB OR DOT_A)
 
 add_subdirectory(core)
 add_subdirectory(data)
+add_subdirectory(gui)
 
 # addition option: build benchmarks
 option(ISIS_GLANCE_BUILD_BENCHMARKS "Build the ISIS-Glance stress tests. For internal use only" OFF)

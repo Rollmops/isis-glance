@@ -28,9 +28,9 @@
 #ifndef _ISIS_GLANCE_WIDGET_PLUGIN_QT_HPP
 #define _ISIS_GLANCE_WIDGET_PLUGIN_QT_HPP
 
-#include <util/widget_base.hpp>
-
+#include <qt4_widget_base.hpp>
 #include <QWidget>
+#include "data/bounding_box.hpp"
 
 namespace isis
 {
@@ -40,10 +40,29 @@ namespace widget
 {
 
 
-class QtWidget : public WidgetBase<QWidget>
+class QtWidget : public qt4::_internal::Qt4WidgetBase
 {
 public:
-	QtWidget( QWidget *parent );
+	QtWidget( QWidget *parent = 0);
+
+public Q_SLOTS:
+	void paintEvent( QPaintEvent * );
+private:
+	void connectSignals();
+	void paintImage( const isis::glance::data::Image::SharedPointer &image, QPainter &painter );
+
+	void updateViewPort();
+
+	QTransform getTransform2ISISSpace() const;
+	QTransform getQtransform( const isis::glance::data::Image::SharedPointer &image) const;
+	isis::util::Matrix3x3< qreal > getOrderedMatrix( const isis::glance::data::Image::SharedPointer &image) const;
+	isis::util::FixedMatrix<qreal, 2, 2> extract2DMatrix( const isis::glance::data::Image::SharedPointer &image) const;
+
+	isis::glance::data::BoundingBox boundingBox_;
+	isis::glance::data::BoundingBox::MappedExtentType window_;
+	isis::util::fvector4 viewPort_;
+	float windowViewPortScaling_;
+	uint16_t rasteringFactor_;
 
 };
 

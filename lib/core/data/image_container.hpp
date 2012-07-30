@@ -41,7 +41,7 @@ namespace glance
 namespace data
 {
 
-class ImageContainer : protected ImageVector
+class ImageContainer
 {
 public:
 	ImageContainer();
@@ -76,12 +76,15 @@ public:
 	void setAllowMultiple( bool allow ) { allowMultiple_ = allow; }
 	const bool &getAllowMultiple() const { return allowMultiple_; }
 
+	ImageVector asVector() const { return vector_; }
+
 	//signals
 	boost::signals2::signal<void ( const ImageContainer &, const ImageSharedPointer & )> signal_image_added;
 	boost::signals2::signal<void ( const ImageContainer &, const ImageSharedPointer & )> signal_image_removed;
 
 private:
 	bool allowMultiple_;
+	ImageVector vector_;
 };
 
 } // end namespace data

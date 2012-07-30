@@ -66,6 +66,11 @@ orientation_type getLatchedOrienation( const geometrical::orientation_type &orie
 
 const orientation_type &getMatrixForPlaneOrientation( const PlaneOrientation &planeOrientation );
 
+isis::util::fvector4 mapCoordsToOrientation( const isis::util::fvector4 &coords, const isis::util::Matrix3x3<float> &orientationMatrix, PlaneOrientation orientation, bool back = false, bool absolute = true );
+
+isis::util::fvector3 mapCoordsToOrientation( const isis::util::fvector3 &coords, const isis::util::Matrix3x3<float> &orientationMatrix, PlaneOrientation orientation, bool back = false, bool absolute = true );
+
+
 } // end namespace util
 } // end namespace glance
 } // end namespace isis

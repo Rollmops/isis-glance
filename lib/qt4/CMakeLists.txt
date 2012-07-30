@@ -1,17 +1,18 @@
 file(GLOB ISIS_GLANCE_QT4_HDR_FILES "*.hpp")
-set(ISIS_GLANCE_QT4_MOC_HPP widget_component.hpp)
-set(ISIS_GLANCE_QT4_SRC_FILES widget_component.cpp)
+set(ISIS_GLANCE_QT4_MOC_HPP widget_component.hpp qt4_widget_base.hpp)
+set(ISIS_GLANCE_QT4_SRC_FILES widget_component.cpp qt4_widget_base.cpp)
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/lib/core)
 
 ############################################################
 # qt4 stuff
 ############################################################
-FIND_PACKAGE(Qt4 COMPONENTS QtCore QtGui REQUIRED)
+FIND_PACKAGE(Qt4 REQUIRED)
 
 set(QT_USE_QTUITOOLS TRUE)
 
 INCLUDE(${QT_USE_FILE})
+ADD_DEFINITIONS(${QT_DEFINITIONS})
 
 QT4_ADD_RESOURCES(ISIS_GLANCE_QT4_RESOURCE_FILES ${RESOURCE_FILES})
 qt4_wrap_cpp(ISIS_GLANCE_QT4_MOC_FILES ${ISIS_GLANCE_QT4_MOC_HPP} OPTIONS -DBOOST_TT_HAS_OPERATOR_HPP_INCLUDED)

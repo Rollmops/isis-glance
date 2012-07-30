@@ -4,34 +4,40 @@
 #include "util/thread.hpp"
 
 
+const size_t counter = 999000;
+
+class MyThread1 : public isis::glance::util::Thread
+{
+	float *sharedData_;
+public:
+	MyThread1( ){}
+	void setSharedData( float* sD ) { sharedData_ = sD; }
+	virtual void run() {
+		for( size_t i = 0; i < counter; i++ ) {
+			if( sharedData_[i] == 0 ) {
+				sharedData_[i]++;
+			}
+		}
+	};
+
+};
 
 
 int main(  )
 {
+	boost::scoped_array<float> sharedData(new float[counter]);
+	for( size_t i = 0; i < counter; i++ ) {
+		sharedData[i] = 0;
+	}
 
-	//  const int counter = 1000;
-	//
-	//  class MyThread : public isis::glance::util::Thread
-	//  {
-	//      int iterations_;
-	//  public:
-	//      MyThread( int iterations ) : Thread( this ), iterations_( iterations )  {}
-	//      virtual void run() {
-	//          for( int i = 0; i < iterations_; i++ ) {
-	//              std::cout << "\033[1;31mthread\033[0m " << std::flush;
-	//          }
-	//      };
-	//
-	//  };
-	//
-	//  MyThread thread( counter );
-	//  thread.start();
-	//
-	//  for( unsigned i = 0; i < counter; i++ ) {
-	//      std::cout << "\033[1;34mmain\033[0m " << std::flush;
-	//  }
-	//
-	//  std::cout << std::endl;
-	//  getchar();
+	
+
+
+	for( size_t i = 0; i < counter; i++ ) {
+		if( sharedData[i] > 1 ) {
+			std::cout << i << " ";
+		}
+	}
+	std::cout << std::endl;
 	return 0;
 }

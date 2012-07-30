@@ -50,7 +50,7 @@ public:
 		this->operator[]( 1 ) = second;
 	}
 };
-}
+} // end namespace _internal
 
 class Slice : public _internal::DataContainer<2>
 {
