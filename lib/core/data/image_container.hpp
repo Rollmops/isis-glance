@@ -76,7 +76,7 @@ public:
 	void setAllowMultiple( bool allow ) { allowMultiple_ = allow; }
 	const bool &getAllowMultiple() const { return allowMultiple_; }
 
-	ImageVector asVector() const { return vector_; }
+	const ImageVector &getVector() const { return vector_; }
 
 	//signals
 	boost::signals2::signal<void ( const ImageContainer &, const ImageSharedPointer & )> signal_image_added;

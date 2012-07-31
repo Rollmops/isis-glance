@@ -54,6 +54,7 @@ private:
 	void updateViewPort();
 
 	QTransform getTransform2ISISSpace() const;
+	void zoomWindow();
 	QTransform getQtransform( const isis::glance::data::Image::SharedPointer &image) const;
 	isis::util::Matrix3x3< qreal > getOrderedMatrix( const isis::glance::data::Image::SharedPointer &image) const;
 	isis::util::FixedMatrix<qreal, 2, 2> extract2DMatrix( const isis::glance::data::Image::SharedPointer &image) const;

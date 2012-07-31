@@ -73,6 +73,8 @@ public:
 		const isis::data::ValueArray<TYPE> &ret = me.castToValueArray<TYPE>();
 		return ret[isis::data::_internal::NDimensional<DIMS>::getLinearIndex( dims )];
 	}
+
+	
 };
 
 } // end namespace _internal
