@@ -32,18 +32,22 @@
 #include <QWidget>
 #include <QVBoxLayout>
 
-namespace isis {
-namespace glance {
-namespace qt4 {
-namespace _internal {
+namespace isis
+{
+namespace glance
+{
+namespace qt4
+{
+namespace _internal
+{
 
 class Qt4WidgetBase : public QWidget, public widget::WidgetBase
 {
 public:
-    Qt4WidgetBase ( QWidget* parent = 0 );
+	Qt4WidgetBase ( QWidget *parent = 0 );
 private:
 	QVBoxLayout *layout_;
-	
+
 };
 
 } // end namespace _internal

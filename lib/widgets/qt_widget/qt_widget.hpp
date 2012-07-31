@@ -43,7 +43,7 @@ namespace widget
 class QtWidget : public qt4::_internal::Qt4WidgetBase
 {
 public:
-	QtWidget( QWidget *parent = 0);
+	QtWidget( QWidget *parent = 0 );
 
 public Q_SLOTS:
 	void paintEvent( QPaintEvent * );
@@ -55,9 +55,9 @@ private:
 
 	QTransform getTransform2ISISSpace() const;
 	void zoomWindow();
-	QTransform getQtransform( const isis::glance::data::Image::SharedPointer &image) const;
-	isis::util::Matrix3x3< qreal > getOrderedMatrix( const isis::glance::data::Image::SharedPointer &image) const;
-	isis::util::FixedMatrix<qreal, 2, 2> extract2DMatrix( const isis::glance::data::Image::SharedPointer &image) const;
+	QTransform getQtransform( const isis::glance::data::Image::SharedPointer &image ) const;
+	isis::util::Matrix3x3< qreal > getOrderedMatrix( const isis::glance::data::Image::SharedPointer &image ) const;
+	isis::util::FixedMatrix<qreal, 2, 2> extract2DMatrix( const isis::glance::data::Image::SharedPointer &image ) const;
 
 	isis::glance::data::BoundingBox boundingBox_;
 	isis::glance::data::BoundingBox::MappedExtentType window_;

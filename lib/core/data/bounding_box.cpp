@@ -27,15 +27,18 @@
  ******************************************************************/
 #include "bounding_box.hpp"
 
-namespace isis {
-namespace glance {
-namespace data {
+namespace isis
+{
+namespace glance
+{
+namespace data
+{
 
-void BoundingBox::refresh ( const ImageContainer& container )
+void BoundingBox::refresh ( const ImageContainer &container )
 {
 	for( unsigned short i = 0; i < 3; i++ ) {
-		operator[](i).first = std::numeric_limits<float>::max();
-		operator[](i).second = -std::numeric_limits<float>::max();
+		operator[]( i ).first = std::numeric_limits<float>::max();
+		operator[]( i ).second = -std::numeric_limits<float>::max();
 	}
 
 	BOOST_FOREACH( ImageVector::const_reference image, container.getVector() ) {
@@ -47,50 +50,52 @@ void BoundingBox::refresh ( const ImageContainer& container )
 				for( unsigned short k = 0; k < 2; k++ ) {
 					const isis::util::ivector4 currentCorner ( i * imageSize[0], j * imageSize[1] , k * imageSize[2] );
 					const isis::util::fvector3 currentPhysicalCorner = image->get().getPhysicalCoordsFromIndex( currentCorner );
+
 					for ( unsigned short l = 0; l < 3; l++ ) {
-						if( currentPhysicalCorner[l] < operator[](l).first ) {
-							operator[](l).first = currentPhysicalCorner[l] - ( mappedVoxelSize[l] / 2. );
+						if( currentPhysicalCorner[l] < operator[]( l ).first ) {
+							operator[]( l ).first = currentPhysicalCorner[l] - ( mappedVoxelSize[l] / 2. );
 						}
 
-						if( currentPhysicalCorner[l] > operator[](l).second ) {
-							operator[](l).second = currentPhysicalCorner[l] + ( mappedVoxelSize[l] / 2. );
+						if( currentPhysicalCorner[l] > operator[]( l ).second ) {
+							operator[]( l ).second = currentPhysicalCorner[l] + ( mappedVoxelSize[l] / 2. );
 						}
 					}
 				}
 			}
 		}
 	}
-	extent_[0] = operator[](0).first;
-	extent_[1] = operator[](0).second;
-	extent_[2] = operator[](1).first;
-	extent_[3] = operator[](1).second;
-	extent_[4] = operator[](2).first;
-	extent_[5] = operator[](2).second;
-	
-		
+	extent_[0] = operator[]( 0 ).first;
+	extent_[1] = operator[]( 0 ).second;
+	extent_[2] = operator[]( 1 ).first;
+	extent_[3] = operator[]( 1 ).second;
+	extent_[4] = operator[]( 2 ).first;
+	extent_[5] = operator[]( 2 ).second;
+
+
 }
 
-BoundingBox::MappedExtentType BoundingBox::asMappedExtentType(isis::glance::geometrical::PlaneOrientation orientation ) const
+BoundingBox::MappedExtentType BoundingBox::asMappedExtentType( isis::glance::geometrical::PlaneOrientation orientation ) const
 {
 	MappedExtentType ret;
+
 	switch( orientation ) {
 	case geometrical::AXIAL:
-		ret = MappedExtentType( operator[](0).first,
-								operator[](1).first,
-								fabs( operator[](0).second - operator[](0).first ),
-								fabs( operator[](1).second - operator[](1).first ) );
+		ret = MappedExtentType( operator[]( 0 ).first,
+								operator[]( 1 ).first,
+								fabs( operator[]( 0 ).second - operator[]( 0 ).first ),
+								fabs( operator[]( 1 ).second - operator[]( 1 ).first ) );
 		break;
 	case geometrical::SAGITTAL:
-		ret = MappedExtentType( operator[](1).first,
-								operator[](2).first,
-								fabs(  operator[](1).second - operator[](1).first ),
-								fabs(  operator[](2).second - operator[](2).first ) );
+		ret = MappedExtentType( operator[]( 1 ).first,
+								operator[]( 2 ).first,
+								fabs(  operator[]( 1 ).second - operator[]( 1 ).first ),
+								fabs(  operator[]( 2 ).second - operator[]( 2 ).first ) );
 		break;
 	case geometrical::CORONAL:
-		ret = MappedExtentType(   operator[](0).first,
-								operator[](2).first,
-								fabs(  operator[](0).second - operator[](0).first ),
-								fabs(  operator[](2).second - operator[](2).first ) );
+		ret = MappedExtentType(   operator[]( 0 ).first,
+								  operator[]( 2 ).first,
+								  fabs(  operator[]( 0 ).second - operator[]( 0 ).first ),
+								  fabs(  operator[]( 2 ).second - operator[]( 2 ).first ) );
 		break;
 	case geometrical::NOT_SPECIFIED:
 		break;

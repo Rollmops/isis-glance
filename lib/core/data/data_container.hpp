@@ -74,7 +74,7 @@ public:
 		return ret[isis::data::_internal::NDimensional<DIMS>::getLinearIndex( dims )];
 	}
 
-	
+
 };
 
 } // end namespace _internal

@@ -30,17 +30,20 @@
 
 #include "geometrical.hpp"
 
-namespace isis {
-namespace glance {
-namespace widget {
+namespace isis
+{
+namespace glance
+{
+namespace widget
+{
 
 struct WidgetProperties {
 
 	WidgetProperties()
-		: plane_orientation(isis::glance::geometrical::AXIAL),
-		orienation_is_latched( false )
+		: plane_orientation( isis::glance::geometrical::AXIAL ),
+		  orienation_is_latched( false )
 	{}
-	
+
 
 	isis::glance::geometrical::PlaneOrientation plane_orientation;
 

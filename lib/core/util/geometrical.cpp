@@ -128,7 +128,7 @@ const orientation_type &getMatrixForPlaneOrientation ( const PlaneOrientation &p
 		return axialMatrix;
 	}
 }
-isis::util::fvector4 mapCoordsToOrientation ( const isis::util::fvector4& coords, const isis::util::Matrix3x3< float >& orientationMatrix, PlaneOrientation orientation, bool back, bool absolute )
+isis::util::fvector4 mapCoordsToOrientation ( const isis::util::fvector4 &coords, const isis::util::Matrix3x3< float >& orientationMatrix, PlaneOrientation orientation, bool back, bool absolute )
 {
 	isis::util::fvector3 ret = mapCoordsToOrientation( isis::util::fvector3( coords[0], coords[1], coords[2] ), orientationMatrix, orientation, back, absolute );
 	return isis::util::fvector4( ret[0], ret[1], ret[2] );
@@ -138,11 +138,13 @@ isis::util::fvector4 mapCoordsToOrientation ( const isis::util::fvector4& coords
 isis::util::fvector3 mapCoordsToOrientation( const isis::util::fvector3 &coords, const isis::util::Matrix3x3<float> &orientationMatrix, PlaneOrientation orientation, bool back, bool absolute )
 {
 	isis::util::fvector3 retVec;
+
 	if( back ) {
-		retVec = getMatrixForPlaneOrientation(orientation).dot( orientationMatrix ).transpose().dot( coords );
+		retVec = getMatrixForPlaneOrientation( orientation ).dot( orientationMatrix ).transpose().dot( coords );
 	} else {
-		retVec = getMatrixForPlaneOrientation(orientation).dot( orientationMatrix ).dot( coords );
+		retVec = getMatrixForPlaneOrientation( orientation ).dot( orientationMatrix ).dot( coords );
 	}
+
 	if( absolute ) {
 		return isis::util::fvector3( fabs( retVec[0] ), fabs( retVec[1] ), fabs( retVec[2] )  );
 	} else {

@@ -27,17 +27,21 @@
  ******************************************************************/
 #include "qt4_widget_base.hpp"
 
-namespace isis {
-namespace glance {
-namespace qt4 {
-namespace _internal {
-
-Qt4WidgetBase::Qt4WidgetBase ( QWidget* parent )
-	: QWidget ( parent ),
-	layout_(new QVBoxLayout( parent ) )
+namespace isis
 {
-	layout_->addWidget(this);
-	layout_->setMargin(0);
+namespace glance
+{
+namespace qt4
+{
+namespace _internal
+{
+
+Qt4WidgetBase::Qt4WidgetBase ( QWidget *parent )
+	: QWidget ( parent ),
+	  layout_( new QVBoxLayout( parent ) )
+{
+	layout_->addWidget( this );
+	layout_->setMargin( 0 );
 }
 
 } // end namespace _internal

@@ -10,8 +10,8 @@ class MyThread1 : public isis::glance::util::Thread
 {
 	float *sharedData_;
 public:
-	MyThread1( ){}
-	void setSharedData( float* sD ) { sharedData_ = sD; }
+	MyThread1( ) {}
+	void setSharedData( float *sD ) { sharedData_ = sD; }
 	virtual void run() {
 		for( size_t i = 0; i < counter; i++ ) {
 			if( sharedData_[i] == 0 ) {
@@ -25,12 +25,13 @@ public:
 
 int main(  )
 {
-	boost::scoped_array<float> sharedData(new float[counter]);
+	boost::scoped_array<float> sharedData( new float[counter] );
+
 	for( size_t i = 0; i < counter; i++ ) {
 		sharedData[i] = 0;
 	}
 
-	
+
 
 
 	for( size_t i = 0; i < counter; i++ ) {
@@ -38,6 +39,7 @@ int main(  )
 			std::cout << i << " ";
 		}
 	}
+
 	std::cout << std::endl;
 	return 0;
 }

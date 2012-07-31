@@ -47,7 +47,7 @@ class ImageState
 {
 public:
 	ImageState( const isis::data::Image &image );
-	
+
 	///The current coordinates we are looking at in image space
 	isis::util::ivector4 voxel_coords;
 

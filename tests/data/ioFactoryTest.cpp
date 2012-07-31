@@ -38,11 +38,11 @@ int main( int /*argc*/, char **argv )
 
 	//  isis::glance::data::IOFactory::setUseProposedDataType( true );
 	//  isis::glance::data::IOFactory::setProposedDataType( isis::glance::data::ImageDataProperties::SCALAR, isis::glance::data::types::UINT16_T );
-	
+
 	timer.restart();
 	isis::glance::data::Image::SharedPointer image = isis::glance::data::IOFactory::load( paths ).front();
 
-	
+
 	/*const isis::glance::data::Volume &vol = image->operator[]( 0 );
 
 	isis::glance::data::Volume::ivec coords;
@@ -60,7 +60,8 @@ int main( int /*argc*/, char **argv )
 	isis::data::Chunk chunkSag( sliceSagittal,  sliceSagittal.getSizeAsVector()[0], sliceSagittal.getSizeAsVector()[1], 1, 1, true );
 	isis::data::Image imageOutSag( chunkSag );
 	isis::data::IOFactory::write( imageOutSag, "/tmp/sagittal.nii" );
-	*/std::cout << timer.elapsed() << " seconds" << std::endl;
+	*/
+	std::cout << timer.elapsed() << " seconds" << std::endl;
 
 
 	return 0;

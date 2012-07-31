@@ -32,16 +32,19 @@
 #include "image_container.hpp"
 #include "util/geometrical.hpp"
 
-namespace isis {
-namespace glance {
-namespace data {
+namespace isis
+{
+namespace glance
+{
+namespace data
+{
 
 class BoundingBox : public isis::util::FixedVector<std::pair<float, float>, 3 >
 {
 public:
-	typedef isis::util::FixedVector<float,6> ExtentType;
+	typedef isis::util::FixedVector<float, 6> ExtentType;
 	typedef isis::util::fvector4 MappedExtentType;
-	
+
 	void refresh( const ImageContainer &container );
 
 	ExtentType asExtentType() const { return extent_; }
