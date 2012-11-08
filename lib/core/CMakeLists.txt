@@ -26,7 +26,7 @@ endif(ISIS_GLANCE_USE_LIBOIL)
 ############################################################
 macro( build_core name type)
     add_library( ${name} ${type} ${GLANCE_CORE_SRC_FILES} )
-	target_link_libraries( ${name} ${CMAKE_DL_LIBS} ${LibOil_LIBRARY})
+	target_link_libraries( ${name} ${CMAKE_DL_LIBS} ${LibOil_LIBRARY} ${Boost_LIBRARIES} ${ISIS_LIB})
     set_target_properties( ${name} PROPERTIES
 		${ISIS_GLANCE_BUILD_PROPERTIES}
 		SOVERSION ${ISIS_GLANCE_VERSION_SO}
