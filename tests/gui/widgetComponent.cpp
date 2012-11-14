@@ -9,6 +9,7 @@ int main( int argc, char **argv )
 	isis::util::slist paths;
 	paths.push_back( argv[1] );
 	isis::glance::widget::QtWidget *w = new isis::glance::widget::QtWidget;
+	w->setPlaneOrientation( isis::glance::geometrical::CORONAL );
 
 	isis::glance::data::IOFactory::setUseProposedDataType( true );
 	isis::glance::data::IOFactory::load( *w, paths );

@@ -130,9 +130,7 @@ Slice Volume::extractSliceCoronal ( const isis::data::ValueArrayBase *src, const
 
 Slice Volume::extractSliceGeneric ( const isis::data::ValueArrayBase *src, const geometrical::orientation_type &orientation, const ivec &coords, bool force32BitAligned ) const
 {
-	const geometrical::orientation_type latchedOrientation = geometrical::getLatchedOrienation( orientation );
-	const isis::util::fvector3 direction = orientation.getRow( isis::data::sliceDim ).norm();
-	const uint8_t *srcPtr = static_cast<const uint8_t *>( src->getRawAddress().get() );
+
 
 
 

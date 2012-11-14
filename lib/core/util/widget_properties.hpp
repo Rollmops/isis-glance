@@ -37,17 +37,22 @@ namespace glance
 namespace widget
 {
 
-struct WidgetProperties {
-
+class WidgetProperties {
+public:
 	WidgetProperties()
-		: plane_orientation( isis::glance::geometrical::AXIAL ),
-		  orienation_is_latched( false )
+		: planeOrientation_( isis::glance::geometrical::AXIAL ),
+		  isOrientationlatched_( false )
 	{}
 
+	void setPlaneOrientation( const geometrical::PlaneOrientation &planeOrientation ) { planeOrientation_ = planeOrientation; }
+	
+	const geometrical::PlaneOrientation &getPlaneOrientation() const { return planeOrientation_; }
+	geometrical::PlaneOrientation getPlaneOrientation() { return planeOrientation_; }
+	
+private:
+	isis::glance::geometrical::PlaneOrientation planeOrientation_;
 
-	isis::glance::geometrical::PlaneOrientation plane_orientation;
-
-	bool orienation_is_latched;
+	bool isOrientationlatched_;
 };
 
 } // end namespace widget

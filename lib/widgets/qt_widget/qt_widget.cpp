@@ -54,7 +54,7 @@ void QtWidget::updateViewPort()
 {
 	//update viewport
 	boundingBox_.refresh( *this );
-	window_ = boundingBox_.asMappedExtentType( plane_orientation ) * rasteringFactor_ ;
+	window_ = boundingBox_.asMappedExtentType( getPlaneOrientation() ) * rasteringFactor_ ;
 	const float _width = window_[2] / rasteringFactor_;
 	const float _height = window_[3] / rasteringFactor_;
 
@@ -95,7 +95,7 @@ void QtWidget::paintImage ( const glance::data::Image::SharedPointer &image, QPa
 	const isis::glance::data::Volume::ivec coords( image->voxel_coords[0], image->voxel_coords[1], image->voxel_coords[2] );
 
 	isis::glance::data::Slice slice = image->operator[]( image->current_volume ).extractSlice(
-										  isis::glance::geometrical::getMatrixForPlaneOrientation( plane_orientation ),
+										  isis::glance::geometrical::getMatrixForPlaneOrientation( getPlaneOrientation() ),
 										  coords, true );
 
 	QImage qImage( static_cast<glance::data::types::ScalarRepnProposed *>( slice->getRawAddress().get() ),
@@ -153,7 +153,7 @@ isis::util::FixedMatrix< qreal, 2, 2 > QtWidget::extract2DMatrix( const isis::gl
 	const isis::util::Matrix3x3<qreal> mat = getOrderedMatrix( image );
 	isis::util::FixedMatrix<qreal, 2, 2> retMatrix;
 
-	switch( plane_orientation ) {
+	switch( getPlaneOrientation() ) {
 	case geometrical::AXIAL:
 		retMatrix.elem( 0, 0 ) = mat.elem( 0, 0 );
 		retMatrix.elem( 0, 1 ) = mat.elem( 0, 1 );
@@ -184,10 +184,10 @@ QTransform QtWidget::getQtransform( const isis::glance::data::Image::SharedPoint
 {
 	const isis::util::FixedMatrix<qreal, 2, 2> mat = extract2DMatrix( image );
 
-	isis::util::fvector3 mapped_voxelSize = geometrical::mapCoordsToOrientation( image->voxel_size, image->orientation_matrix_latched, plane_orientation, false, true ) * rasteringFactor_;
+	isis::util::fvector3 mapped_voxelSize = geometrical::mapCoordsToOrientation( image->voxel_size, image->orientation_matrix_latched, getPlaneOrientation(), false, true ) * rasteringFactor_;
 
-	const uint16_t slice = geometrical::mapCoordsToOrientation( image->voxel_coords, image->orientation_matrix_latched, plane_orientation, false, true )[2];
-	const isis::util::ivector4 mappedCoords = geometrical::mapCoordsToOrientation( isis::util::ivector4( 0, 0, slice ), image->orientation_matrix_latched, plane_orientation, true, true );
+	const uint16_t slice = geometrical::mapCoordsToOrientation( image->voxel_coords, image->orientation_matrix_latched, getPlaneOrientation(), false, true )[2];
+	const isis::util::ivector4 mappedCoords = geometrical::mapCoordsToOrientation( isis::util::ivector4( 0, 0, slice ), image->orientation_matrix_latched, getPlaneOrientation(), true, true );
 	const isis::util::fvector3 _io = image->get().getPhysicalCoordsFromIndex( mappedCoords ) * rasteringFactor_ ;
 	isis::util::FixedVector<qreal, 2> vc;
 	vc[0] = mapped_voxelSize[0] / 2.0;
@@ -195,7 +195,7 @@ QTransform QtWidget::getQtransform( const isis::glance::data::Image::SharedPoint
 	const isis::util::FixedVector<qreal, 2> _vc = mat.dot( vc );
 
 
-	switch( plane_orientation ) {
+	switch( getPlaneOrientation() ) {
 	case geometrical::AXIAL: {
 		QTransform tr1;
 		return QTransform( QTransform( mat.elem( 0, 0 ), mat.elem( 0, 1 ), mat.elem( 1, 0 ), mat.elem( 1, 1 ), 0, 0 )
@@ -228,7 +228,7 @@ QTransform QtWidget::getTransform2ISISSpace() const
 {
 	QTransform retTransform;
 
-	switch ( plane_orientation ) {
+	switch ( getPlaneOrientation() ) {
 	case geometrical::AXIAL:
 		retTransform = QTransform( -1, 0, 0, 1, window_[2] + ( window_[0] * 2 ), 0 );
 		break;

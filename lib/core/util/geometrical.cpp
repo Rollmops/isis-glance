@@ -126,7 +126,10 @@ const orientation_type &getMatrixForPlaneOrientation ( const PlaneOrientation &p
 		LOG( isis::glance::util::Runtime, warning )
 				<< "The matrix for the plane orientation \"NOT_SPECIFIED\" is not defined. Returning the \"AXIAL\" matrix!";
 		return axialMatrix;
+	default:
+		return axialMatrix;
 	}
+	
 }
 isis::util::fvector4 mapCoordsToOrientation ( const isis::util::fvector4 &coords, const isis::util::Matrix3x3< float >& orientationMatrix, PlaneOrientation orientation, bool back, bool absolute )
 {
