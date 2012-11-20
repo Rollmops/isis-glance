@@ -1,4 +1,5 @@
-/****************************************************************
+/*
+***************************************************************
  *
  * <Copyright information>
  *
@@ -24,7 +25,7 @@
  *
  *  Created on: Jun 8, 2012
  *      Author: tuerke
- ******************************************************************/
+ *****************************************************************
 #include "geometrical.hpp"
 #include "common.hpp"
 
@@ -159,3 +160,4 @@ isis::util::fvector3 mapCoordsToOrientation( const isis::util::fvector3 &coords,
 } // end namespace geometrical
 } // end namespace glance
 } // end namespace isis
+*/

@@ -27,6 +27,7 @@
  ******************************************************************/
 #ifndef _ISIS_GLANCE_GEOMETRICAL_HPP
 #define _ISIS_GLANCE_GEOMETRICAL_HPP
+/*
 
 #include <CoreUtils/vector.hpp>
 #include <CoreUtils/matrix.hpp>
@@ -74,5 +75,6 @@ isis::util::fvector3 mapCoordsToOrientation( const isis::util::fvector3 &coords,
 } // end namespace util
 } // end namespace glance
 } // end namespace isis
+*/
 
 #endif // _ISIS_GLANCE_GEOMETRICAL_HPP
