@@ -1,6 +1,6 @@
 file(GLOB ISIS_GLANCE_QT4_HDR_FILES "*.hpp")
-set(ISIS_GLANCE_QT4_MOC_HPP widget_component.hpp qt4_widget_base.hpp)
-set(ISIS_GLANCE_QT4_SRC_FILES widget_component.cpp qt4_widget_base.cpp)
+set(ISIS_GLANCE_QT4_MOC_HPP)
+set(ISIS_GLANCE_QT4_SRC_FILES)
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/lib/core)
 
