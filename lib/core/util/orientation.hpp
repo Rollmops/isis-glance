@@ -43,8 +43,20 @@ public:
 	Orientation( const OrientationType &orientation = axialOrientation_ );
 	Orientation( const PlaneOrientation &planeOrientation );
 
+	/**
+	 *	Returns a copy of the internal orientation matrix.
+	 */
+	OrientationType get() { return internalOrientation_; }
+
+	/**
+	 * Returns a reference of the internal orientation matrix.
+	 */
 	const OrientationType &get() const { return internalOrientation_; }
 
+	/**
+	 * Performs a check if the orientation is one of the plane
+	 * orientations specified by planeOrientation.
+	 */
 	bool is( const PlaneOrientation &planeOrientation ) const
 	{
 		const Orientation lhs( planeOrientation );
