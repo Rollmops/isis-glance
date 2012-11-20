@@ -44,19 +44,22 @@ const Orientation::OrientationType Orientation::coronalOrientation_ = isis::util
 			isis::util::fvector3( 0, 0, -1 ),
 			isis::util::fvector3( 0, 1, 0 ));
 
-Orientation::Orientation() {}
+Orientation::Orientation( const OrientationType &orientation )
+	: internalOrientation_(orientation)
+{
+}
 
 Orientation::Orientation(const PlaneOrientation &planeOrientation)
 {
 	switch( planeOrientation) {
 	case AXIAL:
-		static_cast<OrientationType&>(*this) = axialOrientation_;
+		internalOrientation_ = axialOrientation_;
 		break;
 	case SAGITTAL:
-		static_cast<OrientationType&>(*this) = sagittalOrientation_;
+		internalOrientation_ = sagittalOrientation_;
 		break;
 	case CORONAL:
-		static_cast<OrientationType&>(*this) = coronalOrientation_;
+		internalOrientation_ = coronalOrientation_;
 		break;
 	}
 

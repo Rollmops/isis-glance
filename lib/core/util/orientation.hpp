@@ -29,33 +29,32 @@
 #define _ISIS_GLANCE_ORIENTATION_HPP
 
 #include <CoreUtils/matrix.hpp>
-#include <iostream>
 
 namespace isis {
 namespace glance {
 namespace util {
 
-class Orientation : public isis::util::Matrix3x3<float>
+class Orientation
 {
 	typedef isis::util::Matrix3x3<float> OrientationType;
 public:
 	enum PlaneOrientation { AXIAL, SAGITTAL, CORONAL };
 
-	Orientation();
+	Orientation( const OrientationType &orientation = axialOrientation_ );
 	Orientation( const PlaneOrientation &planeOrientation );
+
+	const OrientationType &get() const { return internalOrientation_; }
 
 	bool is( const PlaneOrientation &planeOrientation ) const
 	{
-		return *this == Orientation( planeOrientation );
+		const Orientation lhs( planeOrientation );
+		return internalOrientation_ == lhs.get();
 	}
 
-
-	bool operator==( const Orientation &rhs ) const {
-		return (this->getRow(0) == rhs.getRow(0) &&
-				this->getRow(1) == rhs.getRow(1) &&
-				this->getRow(2) == rhs.getRow(2));
-	}
 private:
+
+	OrientationType internalOrientation_; // stores the orientation matrix
+
 	static const OrientationType axialOrientation_;
 	static const OrientationType sagittalOrientation_;
 	static const OrientationType coronalOrientation_;
