@@ -18,34 +18,39 @@
  *
  * Author: Erik Tuerke, etuerke@googlemail.com
  *
- * common.hpp
+ * shared_pointer.hpp
  *
  * Description:
  *
- *  Created on: Jun 8, 2012
+ *  Created on: Nov 20, 2012
  *      Author: tuerke
  ******************************************************************/
-#ifndef _ISIS_GLANCE_COMMON_HPP
-#define _ISIS_GLANCE_COMMON_HPP
+#ifndef _ISIS_GLANCE_SHARED_POINTER_HPP
+#define _ISIS_GLANCE_SHARED_POINTER_HPP
 
-#include "log_modules.hpp"
+#include <boost/shared_ptr.hpp>
 
-namespace isis
-{
-namespace glance
-{
-namespace util
-{
+namespace isis {
+namespace glance {
+namespace util {
+namespace convenient {
 
-typedef isis::glance::CoreLog Runtime;
-typedef isis::glance::CoreDebug Debug;
+template<typename C>
+struct SharedPointer : public boost::shared_ptr<C> {
+	SharedPointer( const C &c ) {
+		static_cast< boost::shared_ptr<C> &>( *this ) = boost::shared_ptr<C>( new C( c ) );
+	}
+	SharedPointer( C *c ) {
+		static_cast< boost::shared_ptr<C> &>( *this ) = boost::shared_ptr<C>( c );
+	}
+
+	SharedPointer() {}
+};
+
+}
+}
+}
+}
 
 
-
-
-
-} // end namespace util
-} // end namespace glance
-} // end namespace isis
-
-#endif // _ISIS_GLANCE_COMMON_HPP
+#endif // _ISIS_GLANCE_SHARED_POINTER_HPP
