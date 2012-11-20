@@ -35,17 +35,17 @@ namespace glance
 namespace geometrical
 {
 
-orientation_type getOrientationMatrixFromPropMap ( const isis::util::PropertyMap &propmap )
+OrientationType getOrientationMatrixFromPropMap ( const isis::util::PropertyMap &propmap )
 {
-	const orientation_type retMatrix (  propmap.getPropertyAs<isis::util::fvector3>( "rowVec" ),
+	const OrientationType retMatrix (  propmap.getPropertyAs<isis::util::fvector3>( "rowVec" ),
 										propmap.getPropertyAs<isis::util::fvector3>( "columnVec" ),
 										propmap.getPropertyAs<isis::util::fvector3>( "sliceVec" ) );
 	return retMatrix;
 }
 
-orientation_type getLatchedOrienation ( const orientation_type &orientation_matrix )
+OrientationType getLatchedOrienation ( const OrientationType &orientation_matrix )
 {
-	orientation_type retMatrix;
+	OrientationType retMatrix;
 	retMatrix.fill( 0 );
 	const isis::util::fvector3 &rowVec = orientation_matrix.getRow( 0 );
 	const isis::util::fvector3 &columnVec = orientation_matrix.getRow( 1 );
@@ -101,17 +101,17 @@ orientation_type getLatchedOrienation ( const orientation_type &orientation_matr
 }
 
 
-const orientation_type &getMatrixForPlaneOrientation ( const PlaneOrientation &planeOrientation )
+const OrientationType &getMatrixForPlaneOrientation ( const PlaneOrientation &planeOrientation )
 {
-	static const orientation_type axialMatrix ( isis::util::fvector3( -1, 0, 0 ),
+	static const OrientationType axialMatrix ( isis::util::fvector3( -1, 0, 0 ),
 			isis::util::fvector3( 0, 1, 0 ),
 			isis::util::fvector3( 0, 0, 1 ) );
 
-	static const orientation_type sagittalMatrix (  isis::util::fvector3( 0, 1, 0 ),
+	static const OrientationType sagittalMatrix (  isis::util::fvector3( 0, 1, 0 ),
 			isis::util::fvector3( 0, 0, -1 ),
 			isis::util::fvector3( 1, 0, 0 ) );
 
-	static const orientation_type coronalMatrix (   isis::util::fvector3( -1, 0, 0 ),
+	static const OrientationType coronalMatrix (   isis::util::fvector3( -1, 0, 0 ),
 			isis::util::fvector3( 0, 0, -1 ),
 			isis::util::fvector3( 0, 1, 0 ) );
 

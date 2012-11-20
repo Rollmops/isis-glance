@@ -57,6 +57,7 @@ public:
 	void setHandle( void *handle ) { dlHandle_ = handle; }
 	void setPluginName( std::string pluginName ) { pluginName_ = pluginName; }
 	virtual void operator() ( Interface *format ) = 0;
+	virtual ~PluginDeleterBase() {}
 protected:
 	void *dlHandle_;
 	std::string pluginName_;
@@ -79,6 +80,7 @@ public:
 
 		//we cannot use LOG here, because the loggers are gone allready
 	}
+	virtual ~DefaultPluginDeleter() {}
 };
 }
 

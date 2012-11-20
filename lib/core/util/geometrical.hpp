@@ -38,7 +38,7 @@ namespace glance
 {
 namespace geometrical
 {
-typedef isis::util::Matrix3x3<float> orientation_type;
+typedef isis::util::Matrix3x3<float> OrientationType;
 
 enum PlaneOrientation { AXIAL, SAGITTAL, CORONAL, NOT_SPECIFIED };
 
@@ -60,11 +60,11 @@ isis::util::FixedVector<size_t, DIM> get32BitAlignedSize( const isis::util::Fixe
 	return ret_size;
 }
 
-orientation_type getOrientationMatrixFromPropMap( const isis::util::PropertyMap &propmap );
+OrientationType getOrientationMatrixFromPropMap( const isis::util::PropertyMap &propmap );
 
-orientation_type getLatchedOrienation( const geometrical::orientation_type &orientation_matrix );
+OrientationType getLatchedOrienation( const geometrical::OrientationType &orientation_matrix );
 
-const orientation_type &getMatrixForPlaneOrientation( const PlaneOrientation &planeOrientation );
+const OrientationType &getMatrixForPlaneOrientation( const PlaneOrientation &planeOrientation );
 
 isis::util::fvector4 mapCoordsToOrientation( const isis::util::fvector4 &coords, const isis::util::Matrix3x3<float> &orientationMatrix, PlaneOrientation orientation, bool back = false, bool absolute = true );
 
