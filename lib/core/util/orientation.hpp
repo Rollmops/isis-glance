@@ -29,6 +29,7 @@
 #define _ISIS_GLANCE_ORIENTATION_HPP
 
 #include <CoreUtils/matrix.hpp>
+#include <iostream>
 
 namespace isis {
 namespace glance {
@@ -43,6 +44,17 @@ public:
 	Orientation();
 	Orientation( const PlaneOrientation &planeOrientation );
 
+	bool is( const PlaneOrientation &planeOrientation ) const
+	{
+		return *this == Orientation( planeOrientation );
+	}
+
+
+	bool operator==( const Orientation &rhs ) const {
+		return (this->getRow(0) == rhs.getRow(0) &&
+				this->getRow(1) == rhs.getRow(1) &&
+				this->getRow(2) == rhs.getRow(2));
+	}
 private:
 	static const OrientationType axialOrientation_;
 	static const OrientationType sagittalOrientation_;

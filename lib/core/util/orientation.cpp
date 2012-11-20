@@ -49,15 +49,15 @@ Orientation::Orientation() {}
 Orientation::Orientation(const PlaneOrientation &planeOrientation)
 {
 	switch( planeOrientation) {
-					case AXIAL:
-						static_cast<OrientationType>(*this) = axialOrientation_;
-						break;
-					case SAGITTAL:
-						static_cast<OrientationType>(*this) = sagittalOrientation_;
-						break;
-					case CORONAL:
-						static_cast<OrientationType>(*this) = coronalOrientation_;
-						break;
+	case AXIAL:
+		static_cast<OrientationType&>(*this) = axialOrientation_;
+		break;
+	case SAGITTAL:
+		static_cast<OrientationType&>(*this) = sagittalOrientation_;
+		break;
+	case CORONAL:
+		static_cast<OrientationType&>(*this) = coronalOrientation_;
+		break;
 	}
 
 }
