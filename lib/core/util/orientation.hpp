@@ -72,6 +72,12 @@ public:
 		const Orientation lhs( planeOrientation );
 		return internalOrientation_ == lhs.getMatrix();
 	}
+	/**
+	 * Performs a check if the orientation is latched.
+	 * If the orientation is latched then it is rotated
+	 * only through a multiple of 90.
+	 */
+	bool isLatched() const;
 
 private:
 

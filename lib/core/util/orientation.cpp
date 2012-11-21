@@ -65,6 +65,17 @@ Orientation::Orientation(const PlaneOrientation &planeOrientation)
 
 }
 
+bool Orientation::isLatched() const
+{
+	const isis::util::fvector3 rowVec = internalOrientation_.getRow(0);
+	const isis::util::fvector3 columnVec = internalOrientation_.getRow(1);
+	const isis::util::fvector3 sliceVec = internalOrientation_.getRow(2);
+	return fabs(rowVec[rowVec.getBiggestVecElemAbs()]) ==
+		   fabs(columnVec[columnVec.getBiggestVecElemAbs()]) ==
+		   fabs(columnVec[columnVec.getBiggestVecElemAbs()]);
+
+}
+
 }
 }
 }

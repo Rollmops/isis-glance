@@ -26,11 +26,14 @@ BOOST_AUTO_TEST_CASE( orientation_test ) {
 	BOOST_CHECK(!orientationCoronal.is(util::Orientation::SAGITTAL)); // NOT
 	BOOST_CHECK(!orientationCoronal.is(util::Orientation::AXIAL)); // NOT
 
-
-
-
 }
 
+BOOST_AUTO_TEST_CASE( orientation_latched_test )
+{
+	util::Orientation orientation;
+
+	BOOST_CHECK( orientation.isLatched() );
+}
 }
 }
 }
