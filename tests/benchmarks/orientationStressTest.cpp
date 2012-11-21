@@ -1,14 +1,13 @@
-#include "time.hpp"
+#include "benchmark.hpp"
 #include <util/orientation.hpp>
-
-#define ITERATIONS 300000
 
 int main()
 {
+	using namespace isis::glance::benchmark;
 	isis::glance::util::Orientation orientation;
 	bool isLatched;
 	START_TIMER()
-	for( uint32_t i = 0; i<ITERATIONS; ++i ) {
+	for( IterType i = 0; i<iterations; ++i ) {
 		isLatched = orientation.isLatched();
 	}
 	END_TIMER("isis::glance::Orientation::isLatched()")
