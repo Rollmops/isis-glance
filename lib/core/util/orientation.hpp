@@ -56,12 +56,12 @@ public:
 	/**
 	 *	Returns a copy of the internal orientation matrix.
 	 */
-	OrientationType get() { return internalOrientation_; }
+	OrientationType getMatrix() { return internalOrientation_; }
 
 	/**
 	 * Returns a reference of the internal orientation matrix.
 	 */
-	const OrientationType &get() const { return internalOrientation_; }
+	const OrientationType &getMatrix() const { return internalOrientation_; }
 
 	/**
 	 * Performs a check if the orientation is one of the plane
@@ -70,7 +70,7 @@ public:
 	bool is( const PlaneOrientation &planeOrientation ) const
 	{
 		const Orientation lhs( planeOrientation );
-		return internalOrientation_ == lhs.get();
+		return internalOrientation_ == lhs.getMatrix();
 	}
 
 private:
