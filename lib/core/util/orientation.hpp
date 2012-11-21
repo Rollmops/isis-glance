@@ -40,7 +40,17 @@ class Orientation
 public:
 	enum PlaneOrientation { AXIAL, SAGITTAL, CORONAL };
 
+	/**
+	 * Creates an object by specifying an orientation matrix
+	 * of type OrientationType.
+	 * If no orientation matrix is specified AXIAL is assumed.
+	 */
 	Orientation( const OrientationType &orientation = axialOrientation_ );
+
+	/**
+	 * Creates an object by specifying the plane orientation
+	 * of type PlaneOrientation.
+	 */
 	Orientation( const PlaneOrientation &planeOrientation );
 
 	/**
