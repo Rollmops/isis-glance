@@ -76,6 +76,17 @@ bool Orientation::isLatched() const
 
 }
 
+void Orientation::rotate(const float &x, const float &y, const float &z)
+{
+	const float x_ = (x / 180.0f) * M_PI;
+	const float y_ = (y / 180.0f) * M_PI;
+	const float z_ = (z / 180.0f) * M_PI;
+	const float rotation [] = {	cos(y_) * cos(z_), -cos(x_) * sin(z_) + sin(x_) * sin(y_) * cos(z_), sin(x_) * sin(z_) + cos(x_) * sin(y_) * cos(z_),
+								cos(y_) * sin(z_), cos(x_) * cos(z_) + sin(x_) * sin(y_) * sin(z_), -sin(x_) * cos(z_) + cos(x_) * sin(y_) * sin(z_),
+								-sin(y_), sin(x_) * cos(y_), cos(x_) * cos(y_)};
+	internalOrientation_ = internalOrientation_.dot(OrientationType(rotation));
+}
+
 }
 }
 }

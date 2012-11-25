@@ -9,10 +9,17 @@ bool isLatched = false;
 
 DEFINE_BENCHMARK(isis_glance_util_Orienation_isLatched)
 {
-	for( IterationsType i = 0; i < numberIterations; ++i ) {
+	LOOP() {
 		isLatched = !orientation.isLatched();
 	}
 }
 
+DEFINE_BENCHMARK(isis_glance_util_orientation_rotate)
+{
+	LOOP() {
+		orientation.rotate(45.0f,45.0f,45.0f);
+	}
+
+}
 
 RUN_BENCHMARKS()

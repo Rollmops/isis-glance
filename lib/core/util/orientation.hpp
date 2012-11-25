@@ -75,10 +75,11 @@ public:
 	/**
 	 * Performs a check if the orientation is latched.
 	 * If the orientation is latched then it is rotated
-	 * only through a multiple of 90.
+	 * only through a multiple of 90¡.
 	 */
 	bool isLatched() const;
 
+	void rotate( const float &x, const float &y = 0, const float &z = 0);
 private:
 
 	OrientationType internalOrientation_; // stores the orientation matrix

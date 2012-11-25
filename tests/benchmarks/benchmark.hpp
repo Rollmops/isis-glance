@@ -44,6 +44,7 @@
 		/ CLOCKS_PER_SEC * 1000.0 << "ms" << std::endl;
 
 
+
 namespace isis {
 namespace glance {
 namespace benchmark {
@@ -76,6 +77,11 @@ std::list<BenchmarkBase*> benchmarkList;
 }
 }
 }
+
+#define LOOP()																		\
+		using namespace isis::glance::benchmark;										\
+		for( IterationsType i = 0; i < numberIterations; ++i )
+
 
 //This macro is for defining a benchmark test
 #define DEFINE_BENCHMARK(NAME) 														\
