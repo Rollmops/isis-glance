@@ -7,6 +7,9 @@
 #include <list>
 #include <boost/foreach.hpp>
 
+
+
+
 #define START_TIMER() 																\
 		clock_t timeStart = clock();
 
@@ -21,7 +24,19 @@ namespace isis {
 namespace glance {
 namespace benchmark {
 
+typedef uint32_t IterationsType;
+const IterationsType numberIterations = 80000;
+
 namespace _internal {
+
+void checkDebug() {
+//warn if user builds in debug mode
+#ifndef NDEBUG
+	std::cout << "Benchmark tests are built in debug mode! " <<
+			"This will affect your benchmark results! " << std::endl;
+#endif
+}
+
 class BenchmarkBase {
 public:
 	virtual void operator ()() const = 0;
@@ -52,6 +67,7 @@ std::list<BenchmarkBase*> benchmarkList;
 #define RUN_BENCHMARKS() 															\
 	int main() { 																	\
 	using namespace isis::glance::benchmark; 										\
+	_internal::checkDebug();														\
 	typedef std::list<_internal::BenchmarkBase*> ListType;							\
 	BOOST_FOREACH( ListType::const_reference ref, _internal::benchmarkList) 		\
 	{ 																				\

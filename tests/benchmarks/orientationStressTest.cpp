@@ -2,11 +2,16 @@
 #include <util/orientation.hpp>
 #include <iostream>
 
-isis::glance::util::Orientation orientation;
+using namespace isis::glance::benchmark;
 
-DEFINE_BENCHMARK(test1)
+isis::glance::util::Orientation orientation;
+bool isLatched = false;
+
+DEFINE_BENCHMARK(isis_glance_util_Orienation_isLatched)
 {
-	orientation.isLatched();
+	for( IterationsType i = 0; i < numberIterations; ++i ) {
+		isLatched = !orientation.isLatched();
+	}
 }
 
 
