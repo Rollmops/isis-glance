@@ -1,3 +1,30 @@
+/****************************************************************
+ *
+ * <Copyright information>
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 3
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ *
+ * Author: Erik Tuerke, etuerke@googlemail.com
+ *
+ * benchmark.hpp
+ *
+ * Description:
+ *
+ *  Created on: Nov 25, 2012
+ *      Author: tuerke
+ ******************************************************************/
 #ifndef _ISIS_GLANCE_BENCHMAKR_HPP
 #define _ISIS_GLANCE_BENCHMARK_HPP
 
@@ -6,9 +33,6 @@
 #include <string>
 #include <list>
 #include <boost/foreach.hpp>
-
-
-
 
 #define START_TIMER() 																\
 		clock_t timeStart = clock();
@@ -25,6 +49,8 @@ namespace glance {
 namespace benchmark {
 
 typedef uint32_t IterationsType;
+//arbitrarily set number of iterations that might be used by the user to get a
+//replicable benchmark result
 const IterationsType numberIterations = 80000;
 
 namespace _internal {
@@ -50,6 +76,8 @@ std::list<BenchmarkBase*> benchmarkList;
 }
 }
 }
+
+//This macro is for defining a benchmark test
 #define DEFINE_BENCHMARK(NAME) 														\
 	class Benchmark_ ##NAME 														\
 	: public isis::glance::benchmark::_internal::BenchmarkBase { 					\
@@ -63,7 +91,7 @@ std::list<BenchmarkBase*> benchmarkList;
 	static const Benchmark_ ##NAME  _instance_ ##NAME; 								\
 	void Benchmark_ ##NAME ::operator() () const
 
-
+//This macro has to be called to run all the previously defined benchmarks
 #define RUN_BENCHMARKS() 															\
 	int main() { 																	\
 	using namespace isis::glance::benchmark; 										\
