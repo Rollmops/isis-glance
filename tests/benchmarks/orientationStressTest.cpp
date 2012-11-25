@@ -3,11 +3,10 @@
 #include <iostream>
 
 isis::glance::util::Orientation orientation;
-bool isLatched;
 
 DEFINE_BENCHMARK(test1)
 {
-	isLatched = orientation.isLatched();
+	orientation.isLatched();
 }
 
 
