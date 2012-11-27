@@ -70,10 +70,9 @@ bool Orientation::isLatched() const
 	const isis::util::fvector3 rowVec = internalOrientation_.getRow(0);
 	const isis::util::fvector3 columnVec = internalOrientation_.getRow(1);
 	const isis::util::fvector3 sliceVec = internalOrientation_.getRow(2);
-	return fabs(rowVec[rowVec.getBiggestVecElemAbs()]) ==
-		   fabs(columnVec[columnVec.getBiggestVecElemAbs()]) ==
-		   fabs(columnVec[columnVec.getBiggestVecElemAbs()]);
-
+	// we only have to check two vectors
+	return rowVec.sum() == rowVec[rowVec.getBiggestVecElemAbs()]
+	                              && sliceVec.sum() == sliceVec[sliceVec.getBiggestVecElemAbs()];
 }
 
 void Orientation::rotate(const float &x, const float &y, const float &z)

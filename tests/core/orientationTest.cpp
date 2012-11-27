@@ -28,19 +28,20 @@ BOOST_AUTO_TEST_CASE( orientation_test ) {
 
 }
 
-BOOST_AUTO_TEST_CASE( orientation_latched_test )
+
+BOOST_AUTO_TEST_CASE( orientation_rotation_test )
 {
 	util::Orientation orientation;
 	BOOST_CHECK( orientation.isLatched() );
-}
-
-BOOST_AUTO_TEST_CASE( orientation_rotation_test) {
-	util::Orientation orientation;
 	orientation.rotate(45.0f);
-	std::cout << orientation.getMatrix() << std::endl;
-
+	BOOST_CHECK( !orientation.isLatched() );
+	orientation.rotate(45.0f);
+	BOOST_CHECK( orientation.isLatched() );
+	orientation.rotate(0.,45.0f);
+	BOOST_CHECK( !orientation.isLatched() );
+	orientation.rotate(0.,45.0f);
+	BOOST_CHECK( orientation.isLatched() );
 }
-
 
 }
 }
