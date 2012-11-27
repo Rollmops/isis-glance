@@ -41,6 +41,8 @@ BOOST_AUTO_TEST_CASE( orientation_rotation_test )
 	BOOST_CHECK( !orientation.isLatched() );
 	orientation.rotate(0.,45.0f);
 	BOOST_CHECK( orientation.isLatched() );
+	orientation.rotate(0.,0.,45.0f);
+	BOOST_CHECK( !orientation.isLatched() );
 }
 
 }
